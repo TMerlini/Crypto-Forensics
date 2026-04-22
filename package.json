@@ -1,0 +1,18 @@
+{
+  "name": "sweeper-forensics",
+  "version": "2.0.0",
+  "private": true,
+  "description": "On-chain forensic tracer for sweeper bots, drainer addresses and scam wallets — plus a Flashbots-based rescue toolkit for atomically sweeping assets out of compromised wallets. CLI + web UI.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "trace": "node src/trace.mjs",
+    "ui": "node src/server.mjs",
+    "start": "node src/server.mjs"
+  },
+  "dependencies": {
+    "viem": "^2.21.0"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "_comment": "Known origin addresses. When the tracer hits any of these, it stops recursing because the trail effectively ends there (CEX = KYC'd, bridge = different chain, mixer = privacy-broken trail). Addresses are lowercase. Expand this list as needed — community lists at https://github.com/etherscan-labels and https://github.com/brianleect/etherscan-labels.",
+
+  "cex": {
+    "0x28c6c06298d514db089934071355e5743bf21d60": "Binance 14",
+    "0x21a31ee1afc51d94c2efccaa2092ad1028285549": "Binance 15",
+    "0xdfd5293d8e347dfe59e90efd55b2956a1343963d": "Binance 16",
+    "0x56eddb7aa87536c09ccc2793473599fd21a8b17f": "Binance 17",
+    "0x9696f59e4d72e237be84ffd425dcad154bf96976": "Binance 18",
+    "0x4d9ff50ef4da947364bb9650892b2554e7be5e2b": "Binance 19",
+    "0x564286362092d8e7936f0549571a803b203aaced": "Binance 20",
+    "0x0681d8db095565fe8a346fa0277bffde9c0edbbf": "Binance 21",
+    "0xfe9e8709d3215310075d67e3ed32a380ccf451c8": "Binance 22",
+    "0x4e9ce36e442e55ecd9025b9a6e0d88485d628a67": "Binance 23",
+    "0xbe0eb53f46cd790cd13851d5eff43d12404d33e8": "Binance 7",
+    "0xf977814e90da44bfa03b6295a0616a897441acec": "Binance 8",
+    "0x85b931a32a0725be14285b66f1a22178c672d69b": "Binance Hot 1",
+    "0x708396f17127c42383e3b9014072679b2f60b82f": "Binance Hot 2",
+    "0xe0f0cfde7ee664943906f17f7f14342e76a5cec7": "Binance Hot 3",
+    "0xa344c7ada83113b3b56941f6e85bf2eb425949f3": "Binance Hot 4",
+    "0x5a52e96bacdabb82fd05763e25335261b270efcb": "Binance Hot 5",
+
+    "0x71660c4005ba85c37ccec55d0c4493e66fe775d3": "Coinbase 1",
+    "0x503828976d22510aad0201ac7ec88293211d23da": "Coinbase 2",
+    "0xddfabcdc4d8ffc6d5beaf154f18b778f892a0740": "Coinbase 3",
+    "0x3cd751e6b0078be393132286c442345e5dc49699": "Coinbase 4",
+    "0xb5d85cbf7cb3ee0d56b3bb207d5fc4b82f43f511": "Coinbase 5",
+    "0xeb2629a2734e272bcc07bda959863f316f4bd4cf": "Coinbase 6",
+    "0xd688aea8f7d450909ade10c47faa95707b0682d9": "Coinbase 7",
+    "0x02466e547bfdab679fc49e96bbfc62b9747d997c": "Coinbase 8",
+    "0x6b76f8b1e9e59913bfe758821887311ba1805cab": "Coinbase 9",
+    "0xa090e606e30bd747d4e6245a1517ebe430f0057e": "Coinbase 10",
+    "0xfa52274dd61e1643d2205169732f29114bc240b3": "Coinbase Prime",
+    "0x77696bb39917c91a0c3908d577d5e322095425ca": "Coinbase Prime Custody",
+
+    "0x2910543af39aba0cd09dbb2d50200b3e800a63d2": "Kraken 1",
+    "0x0a869d79a7052c7f1b55a8ebabbea3420f0d1e13": "Kraken 2",
+    "0xe853c56864a2ebe4576a807d26fdc4a0ada63919": "Kraken 3",
+    "0x267be1c1d684f78cb4f6a176c4911b741e4ffdc0": "Kraken 4",
+    "0xfa52274dd61e1643d2205169732f29114bc240b3": "Kraken 5",
+
+    "0x236f9f97e0e62388479bf9e5ba4889e46b0273c3": "OKX 1",
+    "0xa7efae728d2936e78bda97dc267687568dd593f3": "OKX 2",
+    "0x2c8fbb630289363ac80705a1a61273f76fd5a161": "OKX 3",
+    "0x59a5208b32e627891c389ebafc644145224006e8": "OKX 4",
+    "0x868dab0b8e21ec0a48b726a1ccf25826c78c6d7f": "OKX 5",
+    "0x6cc5f688a315f3dc28a7781717a9a798a59fda7b": "OKX 6",
+
+    "0xf89d7b9c864f589bbf53a82105107622b35eaa40": "Bybit Hot 1",
+    "0xee5b5b923ffce93a870b3104b7ca09c3db80047a": "Bybit Hot 2",
+
+    "0x2b5634c42055806a59e9107ed44d43c426e58258": "KuCoin 1",
+    "0x689c56aef474df92d44a1b70850f808488f9769c": "KuCoin 2",
+    "0xa1d8d972560c2f8144af871db508f0b0b10a3fbf": "KuCoin 3",
+    "0x88bd4d3e2997371bceefe8d9386c6b5b4de60346": "KuCoin 4",
+    "0xd6216fc19db775df9774a6e33526131da7d19a2c": "KuCoin 5",
+
+    "0x1151314c646ce4e0efd76d1af4760ae66a9fe30f": "Bitfinex 1",
+    "0x7727e5113d1d161373623e5f49fd568b4f543a9e": "Bitfinex 2",
+    "0x876eabf441b2ee5b5b0554fd502a8e0600950cfa": "Bitfinex 3",
+    "0x1b3cB81E51011b549d78bf720b0d924ac763A7C2": "Bitfinex 4",
+
+    "0x0d0707963952f2fba59dd06f2b425ace40b492fe": "Gate.io 1",
+    "0x1c4b70a3968436b9a0a9cf5205c787eb81bb558c": "Gate.io 2",
+
+    "0xb8c77482e45f1f44de1745f52c74426c631bdd52": "BNB Token (CEX-linked)",
+    "0x46340b20830761efd32832a74d7169b29feb9758": "Crypto.com 1",
+    "0x72a53cdbbcc1b9efa39c834a540550e23463aacb": "Crypto.com 2",
+    "0xcffad3200574698b78f32232aa9d63eabd290703": "Crypto.com 3",
+
+    "0xd24400ae8bfebb18ca49be86258a3c749cf46853": "Gemini 1",
+    "0x5f65f7b609678448494de4c87521cdf6cef1e932": "Gemini 2",
+
+    "0x48f220a27c1fdfe7004cbcd6057064cf5d10cd39": "MEXC"
+  },
+
+  "bridge": {
+    "0xa0c68c638235ee32657e8f720a23cec1bfc77c77": "Polygon Bridge",
+    "0x40ec5b33f54e0e8a33a975908c5ba1c14e5bbbdf": "Polygon Bridge 2",
+    "0x8484ef722627bf18ca5ae6bcf031c23e6e922b30": "Polygon Bridge Proxy",
+    "0x3154cf16ccdb4c6d922629664174b904d80f2c35": "Base Bridge",
+    "0x49048044d57e1c92a77f79988d21fa8faf74e97e": "Base Portal",
+    "0x4dbd4fc535ac27206064b68ffcf827b0a60bab3f": "Arbitrum Bridge",
+    "0xcee284f754e854890e311e3280b767f80797180d": "Arbitrum Gateway",
+    "0x99c9fc46f92e8a1c0dec1b1747d010903e884be1": "Optimism Bridge",
+    "0x467194771dae2967aef3ecbedd3bf9a310c76c65": "DAI Bridge (Optimism)",
+    "0x8315177ab297ba92a06054ce80a67ed4dbd7ed3a": "Arbitrum One Bridge",
+    "0xa4108aa1ec4967f8b52220a4f7e94a8201f2d906": "Stargate Ethereum",
+    "0x150f94b44927f078737562f0fcf3c95c01cc2376": "Stargate Router",
+    "0x4200000000000000000000000000000000000010": "Optimism L2StandardBridge",
+    "0xabea9132b05a70803a4e85094fd0e1800777fbef": "zkSync Bridge",
+    "0x3e4a3a4796d16c0cd582c382691998f7c06420b6": "zkSync Era Bridge",
+    "0x6774bcbd5cecef1336b5300fb5186a12ddd8b367": "zkSync",
+    "0x2f59e9086ec8130e21bd052065a9e6b2497bb102": "Scroll Bridge",
+    "0x6774bcbd5cecef1336b5300fb5186a12ddd8b367": "Scroll L1 Bridge",
+    "0x8ea8fb2c95a4d8d8c9c5df5b279f5fb36dbbc0fd": "LayerZero Endpoint",
+    "0x66a71dcef29a0ffbdbe3c6a460a3b5bc225cd675": "Hop Protocol",
+    "0xb8901acb165ed027e32754e0ffe830802919727f": "Hop Bridge ETH",
+    "0x14559cf24a5f9ea6ccfc4e5de04c396d015b93f1": "Across Protocol"
+  },
+
+  "mixer": {
+    "0x8589427373d6d84e98730d7795d8f6f8731fda16": "Tornado Cash Router",
+    "0x12d66f87a04a9e220743712ce6d9bb1b5616b8fc": "Tornado Cash 0.1 ETH",
+    "0x47ce0c6ed5b0ce3d3a51fdb1c52dc66a7c3c2936": "Tornado Cash 1 ETH",
+    "0x910cbd523d972eb0a6f4cae4618ad62622b39dbf": "Tornado Cash 10 ETH",
+    "0xa160cdab225685da1d56aa342ad8841c3b53f291": "Tornado Cash 100 ETH",
+    "0x722122df12d4e14e13ac3b6895a86e84145b6967": "Tornado Cash Proxy",
+    "0xd90e2f925da726b50c4ed8d0fb90ad053324f31b": "Tornado Cash 1000 DAI",
+    "0xd96f2b1c14db8458374d9aca76e26c3d18364307": "Tornado Cash 100 USDC",
+    "0xd47438c816c9e7f2e2888e060936a499af9582b3": "Tornado Cash 100 USDT",
+    "0x23773e65ed146a459791799d01336db287f25334": "Tornado Cash 10000 DAI",
+    "0x03893a7c7463ae47d46bc7f091665f1893656003": "Tornado Cash 100000 DAI",
+    "0x22aaa7720ddd5388a3c0a3333430953c68f1849b": "Tornado Cash 5000 cDAI",
+    "0xca0840578f57fe71599d29375e16783424023357": "Tornado Cash MIMA",
+    "0x169ad27a470d064dede56a2d3ff727986b15d52b": "Tornado Cash 0.1 ETH (alt)",
+    "0x0836222f2b2b24a3f36f98668ed8f0b38d1a872f": "Tornado Cash Nova",
+    "0xb04e030140b30c27bcdfaafffa98c57d80eda7b4": "Railgun",
+    "0x53fbcadc501c1b847269e1f4aaa6d7ff0d05e5d1": "Railgun Proxy",
+    "0xc2b0c38db4d22a2618cc6d84497742d6d0a78e72": "eXch (mixer)"
+  },
+
+  "mev_and_builders": {
+    "0x6b30ef6e2d6b5a08b6cc20bc13e0a9e5dda1f3f3": "MEV Bot example",
+    "0x95222290dd7278aa3ddd389cc1e1d165cc4bafe5": "beaverbuild (block builder)",
+    "0x1f9090aae28b8a3dceadf281b0f12828e676c326": "rsync-builder",
+    "0x690b9a9e9aa1c9db991c7721a92d351db4fac990": "Titan Builder",
+    "0x4675c7e5baafbffbca748158becba61ef3b0a263": "Fee Recipient: Lido"
+  },
+
+  "scam_known": {
+    "_comment": "Add known drainer/sweeper addresses here if you want them auto-flagged"
+  }
+}

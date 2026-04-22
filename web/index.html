@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sweeper Forensics & Rescue</title>
+<link rel="stylesheet" href="/static/app.css" />
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="logo">◇</span>
+    <span class="title">Sweeper Forensics &amp; Rescue</span>
+    <span class="sub" id="chain-badge">…</span>
+  </div>
+  <nav class="tabs">
+    <button class="tab active" data-tab="trace">Trace</button>
+    <button class="tab" data-tab="rescue">Rescue</button>
+    <button class="tab" data-tab="history">History</button>
+    <button class="tab" data-tab="playbook">Playbook</button>
+  </nav>
+</header>
+
+<main>
+  <!-- TRACE TAB ================================================ -->
+  <section class="panel active" data-panel="trace">
+    <h2>Trace a scam / sweeper / drainer address</h2>
+    <p class="hint">Walks backwards through the funding graph and (optionally) forwards through the cash-out graph. Stops at known CEX / bridge / mixer endpoints so we don't follow Binance's hot wallet into millions of unrelated users.</p>
+
+    <form id="trace-form" class="form">
+      <label>Target address
+        <input name="scamAddress" placeholder="0x…" required pattern="^0x[0-9a-fA-F]{40}$" />
+      </label>
+      <div class="row">
+        <label>Direction
+          <select name="direction">
+            <option value="in">Inflows only (who got drained)</option>
+            <option value="both" selected>Both (inflows + outflows)</option>
+            <option value="out">Outflows only (where money went)</option>
+          </select>
+        </label>
+        <label>Chain
+          <select name="chainId">
+            <option value="1" selected>Ethereum (1)</option>
+            <option value="11155111">Sepolia (11155111)</option>
+            <option value="8453">Base (8453)</option>
+            <option value="42161">Arbitrum (42161)</option>
+            <option value="10">Optimism (10)</option>
+            <option value="137">Polygon (137)</option>
+            <option value="56">BSC (56)</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>Max depth
+          <input type="number" name="maxDepth" value="5" min="1" max="50" />
+        </label>
+        <label>Max addresses
+          <input type="number" name="maxAddresses" value="500" min="1" max="50000" />
+        </label>
+        <label>Rate limit (req/s)
+          <input type="number" name="rps" value="4" min="1" max="30" />
+        </label>
+      </div>
+      <label>Etherscan V2 API key (optional if set in <code>.env</code>)
+        <input type="password" name="apiKey" autocomplete="off" placeholder="leave blank to use .env" />
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" name="stopAtOrigin" checked />
+        Stop recursing at known CEX / bridge / mixer / contract
+      </label>
+      <div class="actions">
+        <button type="submit" class="primary">Start trace</button>
+        <button type="button" id="trace-abort" disabled>Abort</button>
+      </div>
+    </form>
+
+    <div id="trace-progress" class="progress hidden">
+      <div class="bar"><div class="fill" id="trace-fill"></div></div>
+      <div class="progress-stats">
+        <span id="trace-count">0</span> expanded · <span id="trace-queue">0</span> queued · <span id="trace-txs">0</span> txs fetched
+      </div>
+      <pre id="trace-log" class="log"></pre>
+    </div>
+
+    <div id="trace-report" class="report hidden"></div>
+  </section>
+
+  <!-- RESCUE TAB =============================================== -->
+  <section class="panel" data-panel="rescue">
+    <h2>Rescue assets from a compromised wallet</h2>
+    <p class="hint">Atomic Flashbots bundle that funds gas from a burner and sweeps assets to a fresh wallet in the same block. The sweeper bot never sees the gas because the bundle goes through private orderflow straight to block builders.</p>
+
+    <div class="warning">
+      <strong>Keys you enter stay on your machine.</strong>
+      This server listens on <code>127.0.0.1</code>. Keys are used only to sign transactions locally and are never logged or broadcast outside builder RPCs. Still — use a dedicated device and clear your browser history after.
+    </div>
+
+    <form id="rescue-form" class="form">
+      <fieldset>
+        <legend>Wallets</legend>
+        <label>Compromised wallet private key <span class="hint-inline">(the one holding assets you want to save)</span>
+          <input type="password" name="compromisedKey" autocomplete="off" placeholder="0x…" required pattern="^0x[0-9a-fA-F]{64}$" />
+        </label>
+        <label>Funder private key <span class="hint-inline">(fresh burner with a bit of ETH for gas)</span>
+          <input type="password" name="funderKey" autocomplete="off" placeholder="0x…" required pattern="^0x[0-9a-fA-F]{64}$" />
+        </label>
+        <label>Recipient address <span class="hint-inline">(brand new wallet, never interacted with the compromised one)</span>
+          <input name="recipient" placeholder="0x…" required pattern="^0x[0-9a-fA-F]{40}$" />
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Connection</legend>
+        <label>RPC URL <span class="hint-inline">(mainnet: Infura, Alchemy, your own node — needs <code>eth_getTransactionCount</code>, <code>eth_getBalance</code>, <code>eth_estimateGas</code>)</span>
+          <input name="rpcUrl" placeholder="https://mainnet.infura.io/v3/YOUR_KEY" required />
+        </label>
+        <div class="row">
+          <label>Chain
+            <select name="chainId">
+              <option value="1" selected>Ethereum</option>
+              <option value="11155111">Sepolia</option>
+            </select>
+          </label>
+          <label>Priority fee (gwei)
+            <input type="number" name="priorityFeeGwei" value="3" step="0.1" min="0" />
+          </label>
+          <label>Max fee override (gwei, blank = auto 3× basefee)
+            <input type="number" name="maxFeePerGasGwei" step="0.1" min="0" placeholder="auto" />
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Actions to rescue</legend>
+        <div id="actions-list"></div>
+        <div class="action-buttons">
+          <button type="button" data-add="eth">+ Send all ETH</button>
+          <button type="button" data-add="erc20">+ ERC-20</button>
+          <button type="button" data-add="erc721">+ ERC-721</button>
+          <button type="button" data-add="erc1155">+ ERC-1155</button>
+          <button type="button" data-add="custom">+ Custom call</button>
+        </div>
+      </fieldset>
+
+      <div class="actions">
+        <button type="submit" class="primary">1. Compose bundle</button>
+        <button type="button" id="rescue-simulate" disabled>2. Simulate</button>
+        <button type="button" id="rescue-submit" disabled class="danger">3. Submit to builders</button>
+      </div>
+      <label class="checkbox">
+        <span>Blocks to submit across:</span>
+        <input type="number" name="blocksAhead" value="100" min="1" max="300" style="max-width: 6rem" />
+      </label>
+    </form>
+
+    <div id="rescue-output" class="report hidden"></div>
+  </section>
+
+  <!-- HISTORY TAB ============================================= -->
+  <section class="panel" data-panel="history">
+    <h2>Past traces</h2>
+    <p class="hint">Reports saved in <code>forensics/out/</code>.</p>
+    <div id="history-list">Loading…</div>
+  </section>
+
+  <!-- PLAYBOOK TAB ============================================ -->
+  <section class="panel" data-panel="playbook">
+    <h2>Recovery playbook</h2>
+    <div id="playbook-content">Loading…</div>
+  </section>
+</main>
+
+<script src="/static/app.js" type="module"></script>
+</body>
+</html>
