@@ -163,3 +163,9 @@ See `RECOVERY.md` (also rendered as the Playbook tab) for the full field guide.
 3. **Trace the attacker**: run the Trace tab. Attach the report + CSVs to every exchange / police report.
 4. **Identify the leak vector.** Most common: seed stored in cloud, malicious extension, clipboard malware, bad permit signature, phishing. If you can't identify it, a new wallet on the same device will get drained too.
 5. **Rotate everything crypto-adjacent**: seed phrases (new hardware wallet, new seed generated offline), exchange API keys, email passwords + MFA, anything else.
+
+---
+
+## License
+
+MIT — see [LICENSE](./LICENSE). Use it, fork it, help someone else not get rekt. No warranty; you are responsible for what you sign.

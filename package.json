@@ -2,6 +2,12 @@
   "name": "sweeper-forensics",
   "version": "2.0.0",
   "private": true,
+  "license": "MIT",
+  "author": "Tiago Merlini",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TMerlini/Crypto-Forensics.git"
+  },
   "description": "On-chain forensic tracer for sweeper bots, drainer addresses and scam wallets — plus a Flashbots-based rescue toolkit for atomically sweeping assets out of compromised wallets. CLI + web UI.",
   "type": "module",
   "engines": {
