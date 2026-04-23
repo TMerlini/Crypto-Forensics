@@ -27,7 +27,10 @@ import { writeReports } from "./report.mjs";
 import { composeBundle, simulateRescue, submitRescue } from "./rescue.mjs";
 import { buildersForChain } from "./builders.mjs";
 
-const env = loadEnv({ require: ["ETHERSCAN_API_KEY"] }); // scam address optional for server
+// Server boots without any required env — both the API key and the scam address
+// can be entered in the UI per-request. We just warn if they are missing so the
+// Trace tab stays usable out of the box.
+const env = loadEnv({ require: [], warn: ["ETHERSCAN_API_KEY"] });
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, "..");
 const webDir = join(rootDir, "web");

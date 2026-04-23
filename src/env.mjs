@@ -3,7 +3,10 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 // Zero-dep .env parser. Supports KEY=value, # comments, blank lines, quoted values.
-export function loadEnv({ require: requireKeys = ["ETHERSCAN_API_KEY", "SCAM_ADDRESS"] } = {}) {
+export function loadEnv({
+  require: requireKeys = ["ETHERSCAN_API_KEY", "SCAM_ADDRESS"],
+  warn: warnKeys = [],
+} = {}) {
   const here = dirname(fileURLToPath(import.meta.url));
   const candidates = [join(here, "..", ".env"), join(process.cwd(), ".env")];
   for (const path of candidates) {
@@ -26,8 +29,13 @@ export function loadEnv({ require: requireKeys = ["ETHERSCAN_API_KEY", "SCAM_ADD
   const missing = requireKeys.filter((k) => !process.env[k]);
   if (missing.length) {
     throw new Error(
-      `Missing required env vars: ${missing.join(", ")}. Copy forensics/.env.example to forensics/.env and fill them in.`,
+      `Missing required env vars: ${missing.join(", ")}. Copy .env.example to .env and fill them in.`,
     );
+  }
+
+  const warn = warnKeys.filter((k) => !process.env[k]);
+  if (warn.length) {
+    console.warn(`[env] Missing optional env vars: ${warn.join(", ")}. You can provide them in the UI per-request instead.`);
   }
 
   return {
